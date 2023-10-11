@@ -1,0 +1,47 @@
+*************************** MIGRATIONS ***************************************
+https://realpython.com/move-django-model/
+***********************************************************************************
+
+***************************** Génération secret_key ********************************
+from django.core.management.utils import get_random_secret_key
+get_random_secret_key()
+
+***************** STATIC AND ASSET *******************************************
+Django asset on Heroku:
+https://devcenter.heroku.com/articles/django-assets
+
+Using WhiteNoise with Django:
+https://whitenoise.evans.io/en/latest/django.html#
+
+Django how to manage static files:
+https://docs.djangoproject.com/en/4.1/howto/static-files/
+
+How to deploy static files:
+https://docs.djangoproject.com/en/4.1/howto/static-files/deployment/
+
+***********************************************************************************
+Docker:
+
+Construire une image
+docker image build . -t oc_lettings:mytag
+
+Créer et lancer un container (-d pour detached mode)
+docker container run -p 8000:8000 --name my_great_container my_image
+
+En passant des variables d'environnements:
+docker container run -p 8000:8000 -e SECRET_KEY=topsecretsuperkey  --name my_container my_image:tag
+push to repo:
+
+OU un fichier d'env:
+docker container run -p 8000:8000 --env-file=.env  --name my_container my_image:tag
+
+push to repo:
+
+# tag l'image locale
+docker tag local-image:tagname new-repo:tagname
+ex: docker tag render:latest maximus06/render # l'image sur le repo aura le tag latest par défaut
+#push
+docker push new-repo:tagname
+
+Lancer un container en récupérant l'image de docker hub avec --pull:
+docker run -d --pull missing --name=moncontainer -e SECRET_KEY=topsecretsuperkey -p 8000:8000 maximus06/oc_lettings:latest

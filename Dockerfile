@@ -4,11 +4,14 @@ FROM python:3.11.6-alpine
 # set work directory
 WORKDIR /app
 
-# set environment variables
+# set environment variables for python
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-ENV DEBUG 0
+# set environment variables for Django
+ENV DEBUG=${DEBUG:-0}
+ENV SECRET_KEY=${SECRET_KEY:-badsecretkey}
 
+RUN echo ${SECRET_KEY}
 
 # install dependencies
 # COPY ./Pipfile .
@@ -25,8 +28,8 @@ COPY . .
 RUN python manage.py collectstatic --noinput
 
 # add and run as non-root user
-RUN adduser -D myuser
-USER myuser
+# RUN adduser -D myuser
+# USER myuser
 
 EXPOSE 8000
 
