@@ -24,10 +24,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY", default="a secret key not so secret")
 
 # If the 'RENDER' env is not found debug will be True else we are in production mode
+# set RENDER="test" pour charger la var d'env RENDER dans la console
 DEBUG = "RENDER" not in os.environ
 print(f"{DEBUG=}")
 
-ALLOWED_HOSTS = ["localhost"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0", "*"]
 
 # set by render automatically
 RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
